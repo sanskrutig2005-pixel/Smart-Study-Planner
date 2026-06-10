@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Planner</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#333;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#45a049;
+}
+
+table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+table th{
+    background:#4CAF50;
+    color:white;
+}
+
+.summary{
+    margin-top:20px;
+    padding:15px;
+    background:#eef7ee;
+    border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 Smart Study Planner</h1>
+
+<div class="form-group">
+<label>Subject Name</label>
+<input type="text" id="subject">
+</div>
+
+<div class="form-group">
+<label>Exam Date</label>
+<input type="date" id="examDate">
+</div>
+
+<div class="form-group">
+<label>Total Chapters</label>
+<input type="number" id="chapters">
+</div>
+
+<button onclick="addSubject()">Add Subject</button>
+
+<table id="studyTable">
+<thead>
+<tr>
+<th>Subject</th>
+<th>Exam Date</th>
+<th>Days Left</th>
+<th>Chapters</th>
+<th>Chapters/Day</th>
+<th>Study Hours/Day</th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+</table>
+
+<div class="summary" id="summary">
+Total Subjects: 0
+</div>
+
+</div>
+
+<script>
+
+let subjects = [];
+
+function addSubject(){
+
+let subject = document.getElementById("subject").value;
+let examDate = document.getElementById("examDate").value;
+let chapters = document.getElementById("chapters").value;
+
+if(subject === "" || examDate === "" || chapters === ""){
+    alert("Please fill all fields");
+    return;
+}
+
+let today = new Date();
+let exam = new Date(examDate);
+
+let timeDiff = exam - today;
+
+let daysLeft = Math.ceil(
+timeDiff / (1000 * 60 * 60 * 24)
+);
+
+if(daysLeft <= 0){
+    alert("Please select a future date");
+    return;
+}
+
+let chaptersPerDay =
+(chapters / daysLeft).toFixed(2);
+
+let studyHours =
+(chaptersPerDay * 1.5).toFixed(1);
+
+subjects.push({
+    subject,
+    examDate,
+    daysLeft,
+    chapters,
+    chaptersPerDay,
+    studyHours
+});
+
+updateTable();
+
+document.getElementById("subject").value = "";
+document.getElementById("examDate").value = "";
+document.getElementById("chapters").value = "";
+}
+
+function updateTable(){
+
+let tbody =
+document.querySelector("#studyTable tbody");
+
+tbody.innerHTML = "";
+
+subjects.forEach(item => {
+
+let row = `
+<tr>
+<td>${item.subject}</td>
+<td>${item.examDate}</td>
+<td>${item.daysLeft}</td>
+<td>${item.chapters}</td>
+<td>${item.chaptersPerDay}</td>
+<td>${item.studyHours} hrs</td>
+</tr>
+`;
+
+tbody.innerHTML += row;
+
+});
+
+document.getElementById("summary").innerHTML =
+`
+<b>Total Subjects:</b> ${subjects.length}
+`;
+}
+
+</script>
+
+</body>
+</html>
