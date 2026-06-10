@@ -1,4 +1,5 @@
  📚 Smart Study Planner
+ 
  • Overview
 Smart Study Planner is a web-based application that helps students organize their study schedules efficiently. Users can add subjects along with exam dates, and the system automatically calculates the remaining days and recommends daily study hours to help them prepare effectively.
 
