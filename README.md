@@ -11,10 +11,9 @@ Smart Study Planner is a web-based application that helps students organize thei
 - Browser-based access
 
 ✅ Technologies Used
-- Python
-- Flask
 - HTML
 - CSS
+- JAVASCRIPT 
 
 ✅ Project Structure
 
