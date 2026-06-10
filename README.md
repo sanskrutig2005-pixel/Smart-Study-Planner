@@ -12,12 +12,12 @@ Smart Study Planner is a web-based application that helps students organize thei
 - Simple and user-friendly interface
 - Browser-based access
 
-✅ Technologies Used
+🔗✅ Technologies Used
 - HTML
 - CSS
 - JAVASCRIPT 
 
-✅ Project Structure
+🔗✅ Project Structure
 
 SmartStudyPlanner/
 │
@@ -25,9 +25,9 @@ SmartStudyPlanner/
 ├── README.md
 └── requirements.txt
 
-✅ Installation
+🔗✅ Installation
 
-✅ Step 1: Clone the Repository
+🔗✅ Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/smart-study-planner.git
